@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <script src="components/loader.js"></script>
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/ncmb-latest.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/cssua.min.js"></script>
+
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+<script>
+ons.ready(function() {
+      console.log("Onsen UI is ready!");
+    });
+
+    if (ons.platform.isIPhoneX()) {
+      document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
+      document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
+    };
+
+    //ローカルストレージのデータを消去（リセット）
+    localStorage.removeItem('userName');
+
+    //nowuser初期化
+    var nowuser = null;
+    console.log(nowuser)
+
+    //ローカルストレージの中身を表示
+    var obj = localStorage.getItem('userName')
+          console.log(obj)
+          //alert(obj)
+
+
+
+    function downloadImage(){
+          //ファイル名からファイルを取得
+          var fileName = "kenya.jpg";
+          //ダウンロード
+          ncmb.File.download(fileName,"blob")
+              .then(function(blob){
+                //ファイルリーダーにデータを渡す
+                reader.readAsDataURL(blob);
+              })
+              .catch(function(err){
+                console.error(err);
+              })
+        }
+        function downloadImage1(){
+          //ファイル名からファイルを取得
+          var fileName = "kenshi.jpg";
+          //ダウンロード
+          ncmb.File.download(fileName,"blob")
+              .then(function(blob){
+                //ファイルリーダーにデータを渡す
+                reader1.readAsDataURL(blob);
+              })
+              .catch(function(err){
+                console.error(err);
+              })
+        }
+        function downloadImage2(){
+          //ファイル名からファイルを取得
+          var fileName = "kimuti.jpg";
+          //ダウンロード
+          ncmb.File.download(fileName,"blob")
+              .then(function(blob){
+                //ファイルリーダーにデータを渡す
+                reader2.readAsDataURL(blob);
+              })
+              .catch(function(err){
+                console.error(err);
+              })
+        }
+
+    //画像表示
+    var reader = new FileReader();
+        reader.onload = function(e){
+          var dataUrl = reader.result;
+          document.getElementById("showImage1").src = dataUrl;
+        }
+    var reader1 = new FileReader();
+        reader1.onload = function(e){
+          var dataUrl1 = reader1.result;
+          document.getElementById("showImage2").src  = dataUrl1;
+        }
+    var reader2 = new FileReader();
+        reader2.onload = function(e){
+          var dataUrl2 = reader2.result;
+          document.getElementById("showImage3").src  = dataUrl2;
+        }
+
+        //バイブレーション
+        function buttonvibration(){
+          navigator.vibrate(250);
+        }
+        //音声
+        function audioinput(){
+          document.getElementById( 'sound-file' ).play() ;
+        }
+        function audioinput1(){
+          document.getElementById( 'sound-file1' ).play() ;
+        }
+        function audioinput2(){
+          document.getElementById( 'sound-file2' ).play() ;
+        }
+
+
+
+
+</script>
+
+</head>
+<body>
+
+  <!-- ログインページ -->
+  <div data-role="page" id="LoginPage">
+      <section data-role="content">
+      <h1>ログイン</h1><br><br>
+      ユーザー名
+        <input type="text" id="login_username">
+      パスワード
+        <input type="password" id="login_password"><br>
+        <a href="#" id="LoginBtn" data-role="button" data-inline="false" data-theme="b">ログインする</a><br>
+        新規登録
+        <a href="#RegisterPage" data-role="button" data-mini="true" data-inline="true" data-theme="b">登録</a>
+      </section>
+  </div>
+
+  <!-- 登録ページ -->
+  <div data-role="page" id="RegisterPage">
+    <!-- <header data-role="header" data-position="fixed" data-theme="c">
+      <h1>アプリデモ</h1>
+    </header> -->
+      <section data-role="content">
+      <h1>新規登録</h1><br><br>
+      ユーザー名
+        <input type="text" id="reg_username">
+      パスワード
+        <input type="password" id="reg_password"><br>
+        <a href="#" id="RegisterBtn" data-role="button" data-inline="false" data-theme="b">登録する</a>
+        <a href="#LoginPage" data-role="button" data-mini="true" data-inline="true" data-theme="b">戻る</a>
+        <a href="Error.html" id="err-id">登録できない方はこちら</a>
+      </section>
+  </div>
+
+  <!-- 詳細ページ -->
+  <div data-role="page" id="DetailPage">
+    <header data-role="header" data-position="fixed" data-theme="c">
+      <h1>ログイン完了</h1>
+      <a href="#yesNoDialog_logout" class="ui-btn-left" data-rel="popup" data-position-to="window" data-role="button" data-inline="false" data-theme="b">ログアウト</a>
+    </header>
+     <section data-role="content">
+      <!--Detail show-->
+      <p id="index-text">
+        <br><br><br>
+          ようこそ！License In Squareにログイン成功です。<br>
+          このLicense In Squareはあなたの所持している資格を管理し、資格に関する様々な情報を提供してくれます。
+          そこでアプリを快適にお使いいただけるようにアプリ内の機能について説明します。<br>
+          <br>
+          取得一覧　－－－－－－－－　取得資格を一覧表で管理するページ<br>
+          カレンダー　－－－－－－－　資格試験の予定を確認<br>
+          ニュース　－－－－－－－－　資格関係のニュースの閲覧<br>
+          資格登録　－－－－－－－－　取得資格の新規登録をする<br><br><br>
+
+
+          あなたの夢を叶えるためにこのアプリと共に頑張りましょう！
+      </p><br><br><br><br>
+      <a href="Main.html" data-role="button" onclick="lo()">はじめる</a>
+
+      <!--ログアウト処理-->
+      <div data-role="popup" id="yesNoDialog_logout" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+        <div data-role="header" data-theme="c" class="ui-corner-top" style="top: 0 !important;">
+          <h1>ログアウト確認</h1>
+        </div>
+        <div align="middle" data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+          <h3 class="ui-title">
+          <p>ログアウトしてもよろしいですか？</p>
+          <a href="#" id="YesBtn_logout" data-role="button" data-inline="true" data-transition="flow" data-theme="b">はい</a>
+          <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">いいえ</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- HOMEからのログアウト -->
+  <div data-role="page" id="DetailPage2">
+    <header data-role="header" data-position="fixed" data-theme="c">
+      <h1>ログアウト</h1>
+      <a href="#yesNoDialog_logout" class="ui-btn-left" data-rel="popup" data-position-to="window" data-role="button" data-inline="false" data-theme="b">ログアウト</a>
+    </header>
+     <section data-role="content">
+       <br><br><br>
+       <p id="index-text">
+         ログアウトする場合は左上の「ログアウト」ボタンを押してください。<br>
+         HOMEにもどる場合は下の「もどる」ボタンを押してください。
+         <br><br><br>
+       </p>
+      <a href="Main.html" data-role="button" onclick="lo()">もどる</a>
+
+      <!--ログアウト処理-->
+      <div data-role="popup" id="yesNoDialog_logout" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+        <div data-role="header" data-theme="c" class="ui-corner-top" style="top: 0 !important;">
+          <h1>ログアウト確認</h1>
+        </div>
+        <div align="middle" data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+          <h3 class="ui-title">
+          <p>ログアウトしてもよろしいですか？</p>
+          <a href="#" id="YesBtn_logout" data-role="button" data-inline="true" data-transition="flow" data-theme="b" onclick="onLogoutBtn()">はい</a>
+          <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">いいえ</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+
+</body>
+</html>
